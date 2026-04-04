@@ -1,49 +1,61 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+Todas as alterações significativas deste projeto serão documentadas neste arquivo.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
+e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
+
+## [0.1.3] - 2026-04-04
+
+### Adicionado
+
+- Adicionar `edge-cases.test.ts` com 30 novos testes unitários
+- Testar edge cases de `isValidPackageName` (caracteres especiais, unicode, hífens)
+- Testar edge cases de `toValidPackageName` (múltiplos caracteres inválidos, tabs, quebras de linha)
+- Testar `emptyDir` que preserva `.git` e trata diretórios não existentes
+- Testar `copy` e `copyDir` com diretórios aninhados
+- Testar `editFile` com várias modificações de conteúdo
+- Adicionar scripts de teste: `test:watch`, `test:unit`, `test:integration`
 
 ## [0.1.2] - 2026-04-04
 
-### Fixed
+### Corrigido
 
-- Invalid `dependencies` check in `vite.config.ts` (always returned true)
-- Non-existent SVG files being copied from `electron/` directory
-- `vite.config.ts` generation with improper import placement
-- Idempotency issues in file editing operations
+- Verificação inválida de `dependencies` em `vite.config.ts` (sempre retornava true)
+- Arquivos SVG não existentes sendo copiados do diretório `electron/`
+- Geração de `vite.config.ts` com posicionamento incorreto de imports
+- Problemas de idempotência em operações de edição de arquivos
 
-### Refactored
+### Refatorado
 
-- Simplified IPC snippet generation
-- Improved regex for `plugins: [react()]` detection
-- Better idempotency checks for `tsconfig.json` and `.gitignore`
+- Simplificação da geração de snippet IPC
+- Regex melhorada para detecção de `plugins: [react()]`
+- Melhores verificações de idempotência para `tsconfig.json` e `.gitignore`
 
-### Removed
+### Removido
 
-- Unused color functions (`gary`, `cyan`, `yellow`, `green`)
-- Unnecessary `editFile` call for `App.tsx`
-- Dead code from codebase
+- Funções de cores não utilizadas (`gary`, `cyan`, `yellow`, `green`)
+- Chamada desnecessária de `editFile` para `App.tsx`
+- Código morto do codebase
 
-### Chores
+### Manutenção
 
-- Added `pretest` script to auto-build before tests
-- Updated test to use correct `vite.svg` filename
-- Added error handling for missing `electron/package.json`
+- Adicionado script `pretest` para build automático antes dos testes
+- Atualizado teste para usar o nome correto `vite.svg`
+- Adicionado tratamento de erros para `electron/package.json` ausente
 
 ## [0.1.1] - 2026-04-04
 
-### Fixed
+### Corrigido
 
-- Improved electron main and preload with better comments and IPC API
+- Melhorado electron main e preload com melhores comentários e API IPC
 
 ## [0.1.0] - 2026-04-04
 
-### Added
+### Adicionado
 
-- Initial release
-- Electron + Vite + React + TypeScript scaffolding
-- Electron Builder configuration
-- IPC communication example
-- Unit and integration tests
+- Lançamento inicial
+- Scaffold de Electron + Vite + React + TypeScript
+- Configuração do Electron Builder
+- Exemplo de comunicação IPC
+- Testes unitários e de integração
