@@ -17,10 +17,6 @@ const TEMPLATE_NAME = 'template-react-ts'
 
 const COLOURS = {
   $: (c: number) => (str: string) => `\x1b[${c}m` + str + '\x1b[0m',
-  gary: (str: string) => COLOURS.$(90)(str),
-  cyan: (str: string) => COLOURS.$(36)(str),
-  yellow: (str: string) => COLOURS.$(33)(str),
-  green: (str: string) => COLOURS.$(32)(str),
   red: (str: string) => COLOURS.$(31)(str),
 }
 
@@ -155,7 +151,12 @@ async function init() {
 function setupElectron(root: string) {
   const sourceDir = path.resolve(__dirname, '..', 'electron')
   const electronDir = path.join(root, 'electron')
-  const publicDir = path.join(root, 'public')
+  const electronPkgPath = path.resolve(__dirname, '..', 'electron/package.json')
+  
+  if (!fs.existsSync(electronPkgPath)) {
+    throw new Error('electron/package.json not found')
+  }
+  
   const pkg = requireMod('../electron/package.json')
 
   fs.mkdirSync(electronDir, { recursive: true })
@@ -166,13 +167,6 @@ function setupElectron(root: string) {
     'preload.ts',
   ]) {
     fs.copyFileSync(path.join(sourceDir, name), path.join(electronDir, name))
-  }
-
-  for (const name of [
-    'electron-vite.animate.svg',
-    'electron-vite.svg',
-  ]) {
-    fs.copyFileSync(path.join(sourceDir, name), path.join(publicDir, name))
   }
 
   for (const name of [
@@ -192,16 +186,18 @@ function setupElectron(root: string) {
     return JSON.stringify(json, null, 2) + '\n'
   })
 
-  const snippets = (indent = 0) => `
+  const snippets = `
 window.ipcRenderer.on('main-process-message', (_event, message) => {
   console.log(message)
-})
-`.trim()
-    .split('\n')
-    .map(line => line ? ' '.repeat(indent) + line : line)
-    .join('\n')
+}
+`
 
-  editFile(path.join(root, 'src/main.tsx'), content => `${content}\n${snippets()}\n`)
+  editFile(path.join(root, 'src/main.tsx'), content => {
+    if (content.includes("window.ipcRenderer.on('main-process-message'")) {
+      return content
+    }
+    return `${content}\n${snippets}\n`
+  })
 
   const electronPlugin = `electron({
       main: {
@@ -213,38 +209,45 @@ window.ipcRenderer.on('main-process-message', (_event, message) => {
       renderer: {},
     })`
 
-  editFile(path.join(root, 'vite.config.ts'), content =>
-    content
-      .split('\n')
-      .map(line => line.includes("import { defineConfig } from 'vite'")
-        ? `${line}
-import path from 'node:path'
-import electron from 'vite-plugin-electron/simple'`
-        : line)
-      .map(line => line.trimStart().startsWith('plugins')
-        ? `  plugins: [
-    react(),
-    ${electronPlugin},
-  ],`
-        : line)
-      .join('\n')
-  )
+  editFile(path.join(root, 'vite.config.ts'), content => {
+    if (content.includes('vite-plugin-electron/simple')) {
+      return content
+    }
+    const lines = content.split('\n')
+    const newLines: string[] = []
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i]
+      newLines.push(line)
+      if (line.trim() === '' && lines[i - 1]?.trim().startsWith('import ') && !lines[i + 1]?.trim().startsWith('import ')) {
+        newLines.push(`import path from 'node:path'`)
+        newLines.push(`import electron from 'vite-plugin-electron/simple'`)
+      }
+      if (/\bplugins:\s*\[react\(\)\]/.test(line)) {
+        newLines[newLines.length - 1] = line.replace('[react()]', `[react(), ${electronPlugin}]`)
+      }
+    }
+    return newLines.join('\n')
+  })
 
-  editFile(path.join(root, 'tsconfig.json'), content =>
-    content
+  editFile(path.join(root, 'tsconfig.json'), content => {
+    if (content.includes('"electron"') && content.includes('"include"')) {
+      return content
+    }
+    return content
       .split('\n')
       .map(line => line.trimStart().startsWith('"include"') ? line.replace(']', ', "electron"]') : line)
       .join('\n')
-  )
+  })
 
-  editFile(path.join(root, '.gitignore'), content =>
-    content
+  editFile(path.join(root, '.gitignore'), content => {
+    if (content.includes('dist-electron\nrelease')) {
+      return content
+    }
+    return content
       .split('\n')
       .map(line => line === 'dist-ssr' ? `${line}\ndist-electron\nrelease` : line)
       .join('\n')
-  )
-
-  editFile(path.join(root, 'src/App.tsx'), content => content)
+  })
 }
 
 init().catch((e) => {

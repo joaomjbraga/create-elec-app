@@ -74,6 +74,7 @@ pnpm dev
 - 📁 **Estrutura Organizada** - Separação clara de responsabilidades
 - ♻️ **Hot Reload** - Atualização instantânea no desenvolvimento
 - 🧪 **Testes Incluídos** - Estrutura para testes com Vitest
+- 🔄 **Idempotente** - Scaffolding pode ser executado múltiplas vezes sem duplicações
 
 ---
 
@@ -263,8 +264,9 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
 ```bash
 pnpm dev        # Inicia o desenvolvimento com hot reload
 pnpm build      # Gera build de produção
-pnpm test       # Executa os testes
+pnpm test       # Executa os testes (inclui build automático)
 pnpm preview    # Visualiza o build de produção
+pnpm watch      # Watch mode para build
 ```
 
 ### Fluxo de Desenvolvimento

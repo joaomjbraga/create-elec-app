@@ -40,7 +40,7 @@ Isso permite usar `create-elec-app` globalmente como se estivesse instalado via 
 |---------|-----------|
 | `pnpm dev` | Inicia o desenvolvimento (watch mode) |
 | `pnpm build` | Gera build de produção |
-| `pnpm test` | Executa os testes |
+| `pnpm test` | Executa os testes (inclui build automático) |
 | `pnpm watch` | Watch mode para build |
 
 ### 5. Teste localmente

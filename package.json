@@ -1,6 +1,6 @@
 {
   "name": "create-elec-app",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "description": "CLI tool to scaffold Electron + Vite + React applications",
   "license": "MIT",
@@ -40,6 +40,7 @@
     "watch": "vite build --watch",
     "build": "vite build",
     "test": "vitest run",
+    "pretest": "pnpm build",
     "prepublishOnly": "pnpm build && pnpm test"
   },
   "engines": {

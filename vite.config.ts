@@ -20,7 +20,7 @@ export default defineConfig({
         'vite',
         ...builtinModules,
         ...builtinModules.map(m => `node:${m}`),
-        ...Object.keys('dependencies' in pkg ? pkg.dependencies as object : {}),
+        ...Object.keys(pkg.dependencies || {}),
       ],
     },
   },
