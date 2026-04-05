@@ -70,11 +70,13 @@ pnpm dev
 - 🔷 **TypeScript Nativo** - Código tipado do início ao fim
 - ⚛️ **React Moderno** - Com Vite para desenvolvimento ágil
 - 🔐 **Seguro por Padrão** - Configurações de segurança otimizadas
+- 🛡️ **Proteção contra Arquivos Perigosos** - Bloqueia .env, chaves, certificados
 - 🧩 **Electron Builder** - Empacotamento para Windows, macOS e Linux
 - 📁 **Estrutura Organizada** - Separação clara de responsabilidades
 - ♻️ **Hot Reload** - Atualização instantânea no desenvolvimento
 - 🧪 **Testes Incluídos** - Estrutura para testes com Vitest
 - 🔄 **Idempotente** - Scaffolding pode ser executado múltiplas vezes sem duplicações
+- 🎨 **Mensagens Coloridas** - Output visual com cores e ícones
 
 ---
 

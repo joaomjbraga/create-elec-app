@@ -5,6 +5,41 @@ Todas as alterações significativas deste projeto serão documentadas neste arq
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Corrigido
+
+- Vulnerabilidade de path traversal na validação do diretório alvo
+- Código redundante na edição de vite.config.ts e tsconfig.json
+- Lógica do .gitignore para adicionar dist-electron e release independente de dist-ssr
+- Regex de plugins para lidar com arrays em múltiplas linhas corretamente
+- isEmpty para tratar diretórios não existentes
+- Validação de template antes de criar o diretório de destino
+- Build script com undefined causando string inválida
+- Verificação redundante na lógica de diretório
+
+### Adicionado
+
+- Sistema de log padronizado com cores (log.info, log.success, log.error, log.warn, log.step)
+- Mensagens de progresso durante o scaffolding
+- Cleanup em caso de falha no setupElectron
+- Detecção de pnpm via lockfile
+- Proteção contra arquivos perigosos (.env, *.key, *.pem, etc.)
+- Try-catch em todas as operações de arquivo
+- Validação de path com path.resolve() para detectar traversal como /foo/../bar
+
+### Alterado
+
+- Removido .npmrc do template (específico do pnpm)
+- Mensagens de erro mais amigáveis (sem stack traces)
+- Verificação de lockfiles para detectar gerenciador de pacotes
+
+### Refatorado
+
+- emptyDir agora lança erro em vez de apenas warn
+- isValidPackageName verifica limite de 214 caracteres do npm
+- Código organizado com funções menores de log
+
 ## [0.1.0] - 2026-04-05
 
 ### Corrigido
