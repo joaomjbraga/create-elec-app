@@ -1,6 +1,6 @@
 {
   "name": "create-elec-app",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "type": "module",
   "description": "CLI tool to scaffold Electron + Vite + React applications",
   "license": "MIT",

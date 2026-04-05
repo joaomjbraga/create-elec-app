@@ -5,6 +5,13 @@ Todas as alterações significativas deste projeto serão documentadas neste arq
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
+## [0.1.5] - 2026-04-05
+
+### Alterado
+
+- Removido código demo do template Electron (comentários e listeners IPC não utilizados)
+- Simplificado arquivos main.ts, preload.ts e electron-env.d.ts
+
 ## [0.1.4] - 2026-04-04
 
 ### Corrigido
