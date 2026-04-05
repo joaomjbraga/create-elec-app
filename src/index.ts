@@ -15,7 +15,6 @@ const TEMPLATE_NAME = 'template-react-ts'
 
 const COLOURS = {
   $: (c: number) => (str: string) => `\x1b[${c}m` + str + '\x1b[0m',
-  reset: (str: string) => `\x1b[0m` + str,
   red: (str: string) => COLOURS.$(31)(str),
   green: (str: string) => COLOURS.$(32)(str),
   yellow: (str: string) => COLOURS.$(33)(str),
