@@ -185,19 +185,6 @@ function setupElectron(root: string) {
     return JSON.stringify(json, null, 2) + '\n'
   })
 
-  const snippets = `
-window.ipcRenderer.on('main-process-message', (_event, message) => {
-  console.log(message)
-});
-`
-
-  editFile(path.join(root, 'src/main.tsx'), content => {
-    if (content.includes("window.ipcRenderer.on('main-process-message'")) {
-      return content
-    }
-    return `${content}\n${snippets}\n`
-  })
-
   const electronPlugin = `electron({
       main: {
         entry: 'electron/main.ts',
