@@ -5,6 +5,16 @@ Todas as alterações significativas deste projeto serão documentadas neste arq
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-04-05
+
+### Alterado
+
+- Template minimalista para base de desenvolvimento
+- Removido código não utilizado e assets desnecessários
+- Código do Electron main simplificado
+- App React vazio como ponto de partida
+- Pasta public com ícone SVG simples
+
 ## [1.3.0] - 2026-04-05
 
 ### Adicionado

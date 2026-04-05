@@ -4,6 +4,8 @@ Obrigado pelo seu interesse em contribuir!
 
 Este é um projeto CLI que permite criar rapidamente aplicações desktop com Electron + Vite + React + TypeScript
 
+> **Nota**: A partir da versão 1.4.0, o template gerado é **minimalista**, contendo apenas a estrutura base para desenvolvimento. Isso permite maior flexibilidade para customização conforme as necessidades do projeto.
+
 ## Pré-requisitos
 
 - **Node.js**: >= 18.x

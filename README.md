@@ -66,6 +66,7 @@ pnpm dev
 
 ## ✨ Features
 
+- 🎯 **Template Minimalista** - Base limpa para customização conforme necessidade
 - ⚡ **Scaffolding Rápido** - Crie projetos Electron em segundos
 - 🔷 **TypeScript Nativo** - Código tipado do início ao fim
 - ⚛️ **React Moderno** - Com Vite para desenvolvimento ágil
