@@ -2,12 +2,10 @@ import { builtinModules } from 'node:module'
 import { defineConfig } from 'vite'
 import pkg from './package.json'
 
-const watch = process.argv.slice(2).includes('--watch')
-
 export default defineConfig({
   build: {
     minify: false,
-    emptyOutDir: !watch,
+    emptyOutDir: !process.argv.slice(2).includes('--watch'),
     target: 'node18',
     lib: {
       entry: 'src/index',

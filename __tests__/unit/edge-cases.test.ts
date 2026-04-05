@@ -29,12 +29,12 @@ describe('isValidPackageName - Edge Cases', () => {
     expect(isValidPackageName('моё')).toBe(false)
   })
 
-  it('should reject names with consecutive hyphens', () => {
+  it('should accept names with consecutive hyphens', () => {
     expect(isValidPackageName('my--app')).toBe(true)
     expect(isValidPackageName('my---app')).toBe(true)
   })
 
-  it('should accept names with leading characters', () => {
+  it('should accept names with leading hyphen (regex allows it)', () => {
     expect(isValidPackageName('-my-app')).toBe(true)
     expect(isValidPackageName('-app')).toBe(true)
   })

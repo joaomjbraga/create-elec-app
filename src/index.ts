@@ -21,7 +21,6 @@ const COLOURS = {
 }
 
 const cwd = process.cwd()
-const requireMod = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const argTargetDir = process.argv.slice(2).join(' ')
 const defaultTargetDir = 'electron-vite-project'
@@ -157,6 +156,7 @@ function setupElectron(root: string) {
     throw new Error('electron/package.json not found')
   }
   
+  const requireMod = createRequire(import.meta.url)
   const pkg = requireMod('../electron/package.json')
 
   fs.mkdirSync(electronDir, { recursive: true })
@@ -185,14 +185,7 @@ function setupElectron(root: string) {
     return JSON.stringify(json, null, 2) + '\n'
   })
 
-  const electronPlugin = `electron({
-      main: {
-        entry: 'electron/main.ts',
-      },
-      preload: {
-        input: path.join(process.cwd(), 'electron/preload.ts'),
-      },
-    })`
+  const electronPlugin = "electron({\n      main: {\n        entry: 'electron/main.ts',\n      },\n      preload: {\n        input: path.join(process.cwd(), 'electron/preload.ts'),\n      },\n    })"
 
   editFile(path.join(root, 'vite.config.ts'), content => {
     if (content.includes('vite-plugin-electron/simple')) {
@@ -215,9 +208,6 @@ function setupElectron(root: string) {
   })
 
   editFile(path.join(root, 'tsconfig.json'), content => {
-    if (content.includes('"electron"') && content.includes('"include"')) {
-      return content
-    }
     return content
       .split('\n')
       .map(line => line.trimStart().startsWith('"include"') ? line.replace(']', ', "electron"]') : line)
